@@ -2,6 +2,7 @@ import express, { urlencoded } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import connectToDb from "./db/connectToDb.js";
 
 import authRoutes from "./routes/auth.route.js";
 
@@ -17,6 +18,13 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
 
-app.listen(PORT, () => {
-  console.log("Listening on port", PORT);
-});
+connectToDb()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log("Listening on port", PORT);
+    });
+  })
+  .catch((error) => {
+    console.log("Error in connecting the mongo database", error);
+    process.exit(1);
+  });
