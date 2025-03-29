@@ -9,6 +9,8 @@ import {
   SmileIcon,
   VideoIcon,
 } from "lucide-react";
+import { useState } from "react";
+import { ChatAreaNavbar } from "./chatAreaNavbar";
 
 export const MessageArea = () => {
   const user = {
@@ -16,32 +18,17 @@ export const MessageArea = () => {
     status: "online",
   };
 
+  const [value, setValue] = useState("");
+
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
   if (user) {
     return (
       <div className="w-full h-full flex flex-col">
-        <div className="w-full h-[4rem] flex items-center justify-between bg-black/70 px-4">
-          <div className="flex items-center ">
-            <p className="w-[3rem] h-[3rem] rounded-full bg-slate-300 flex items-center justify-center ml-4">
-              YN
-            </p>
-            <div className="flex flex-col">
-              <h1 className="text-lg font-semibold ml-4 text-slate-300">
-                Username
-              </h1>
-              <p className="text-sm ml-4 flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-400" />
-                {user.status}
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-5">
-            <PhoneCallIcon className="w-5 h-5 text-slate-300" />
-            <VideoIcon className="w-5 h-5 text-slate-300" />
-            <InfoIcon className="w-5 h-5 text-slate-300" />
-            <MenuIcon className="w-5 h-5 text-slate-300" />
-          </div>
-        </div>
-        <div className="w-full h-[38rem] bg-[url('/assets/back.jpg')] flex flex-col-reverse overflow-y-auto p-4">
+        <ChatAreaNavbar />
+        <div className="w-full h-[38rem] bg-[url('/assets/back.jpg')]  backdrop-blur-3xl flex flex-col-reverse overflow-y-auto p-4">
           <div className="flex justify-end">
             <div className="p-3 max-w-xs text-white bg-green-500 rounded-lg rounded-br-none">
               Hello!
@@ -49,21 +36,26 @@ export const MessageArea = () => {
           </div>
           <div className="flex justify-start">
             <div className="p-3 max-w-xs bg-gray-300 text-black rounded-lg rounded-bl-none">
-              Hey there!
+              {value}
             </div>
           </div>
         </div>
         <div className="w-full h-[3.5rem] bg-slate-300 flex items-center px-4">
-          <PaperclipIcon className="w-5 h-5 ml-4 text-slate-900" />
-          <SmileIcon className="w-5 h-5 ml-4 text-slate-900" />
+          <PaperclipIcon className="w-6 h-6 mr-4 text-slate-900 cursor-pointer hover:opacity-80" />
+          <SmileIcon className="w-6 h-6 mr-2 text-slate-900 cursor-pointer hover:opacity-80" />
           <input
             type="text"
             placeholder="Type a message"
-            className="px-3 w-full h-[2.5rem] border-1 outline-none mx-3 rounded-lg"
+            className="px-3 w-full h-[2.5rem] border-1 border-slate-500  outline-none mx-3 rounded-lg "
+            value={value}
+            onChange={handleValueChange}
           />
-          <MicIcon className="w-5 h-5 mr-3 cursor-pointer" />
+          <MicIcon className="w-5 h-5 mr-3  cursor-pointer hover:opacity-80" />
           <span className="w-13 h-10 cursor-pointer  bg-green-600 rounded-lg flex items-center justify-center ">
-            <SendIcon className="w-5 h-5" />
+            <SendIcon
+              onClick={(e) => handleValueChange}
+              className="w-5 h-5  cursor-pointer hover:opacity-80"
+            />
           </span>
         </div>
       </div>

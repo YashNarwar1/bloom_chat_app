@@ -2,14 +2,17 @@ import { MessageSquareIcon } from "lucide-react";
 import { Input } from "../componets/Input";
 import { Button } from "../componets/Button";
 import useStore from "../store/auth.store";
+import LoginUser from "../api/login.api";
 
 type InputType = "email" | "password";
 
 const Login = () => {
   const { email, password, setField } = useStore();
+  const mutation = LoginUser();
 
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
+    mutation.mutate({ email, password });
     console.log("Login data", { email: email, password: password });
     setField("username", "");
     setField("email", "");

@@ -1,12 +1,9 @@
-// import Register from "./pages/Register";
-
-import Login from "./pages/Login";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div className="w-full min-h-screen">
-      {/* <Register /> */}
-      <Login />
+      <Home />
     </div>
   );
 }

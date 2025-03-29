@@ -19,7 +19,7 @@ export const Input = ({
   onChange,
 }: InputProps) => {
   return (
-    <div className="flex flex-col gap-2 text-start mb-4">
+    <div className="flex flex-col gap-2 text-start mb-2">
       <label
         className="text-lg text-slate tracking-wider font-medium"
         htmlFor={name}>
@@ -33,7 +33,7 @@ export const Input = ({
         value={value}
         onChange={onChange}
         className={cn(
-          " px-2 py-2 rounded-md text-slate-800 border-1 border-slate-400 text-md",
+          " px-2 py-1 rounded-md text-slate-800 border-1 border-slate-400 text-md",
           className
         )}
       />

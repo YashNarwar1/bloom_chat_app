@@ -2,18 +2,22 @@ import { MessageSquareIcon } from "lucide-react";
 import { Input } from "../componets/Input";
 import { Button } from "../componets/Button";
 import useStore from "../store/auth.store";
+import RegisterUser from "../api/signup.api";
 
-type name = "username" | "email" | "password";
+type name = "username" | "email" | "password" | "confirmPassword";
 
 const Register = () => {
-  const { username, email, password, setField } = useStore();
+  const { username, email, password, confirmPassword, setField } = useStore();
+  const mutation = RegisterUser();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("formdata", { username, email, password });
+    mutation.mutate({ username, email, password, confirmPassword });
+    console.log("formdata", { username, email, password, confirmPassword });
     setField("username", "");
     setField("email", "");
     setField("password", "");
+    setField("confirmPassword", "");
   };
 
   const handleChange = (fieldName: name, value: string) => {
@@ -63,9 +67,19 @@ const Register = () => {
                 title="Password"
                 name="password"
                 type="password"
-                placeholder="Enter Your Pas****d"
+                placeholder="Enter Your Password"
                 value={password}
                 onChange={(e) => handleChange("password", e.target.value)}
+              />
+              <Input
+                title="Confirm Password"
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm your Password"
+                value={confirmPassword}
+                onChange={(e) =>
+                  handleChange("confirmPassword", e.target.value)
+                }
               />
               <p className="text-sm font-bold text-slate-600  text-start mt-4">
                 By registering you agree to bloom's terms and conditions.
