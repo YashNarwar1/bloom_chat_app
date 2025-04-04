@@ -1,8 +1,11 @@
 import { PlusIcon, SearchIcon } from "lucide-react";
 import { Input } from "../Input";
 import { ChatUserBar } from "../Chat-user-bar";
+import GetAllUsers from "../../api/getAllUsers.api";
 
 export const StatusMiddleBar = () => {
+  const { data: users } = GetAllUsers();
+
   return (
     <div className="w-[20rem] h-screen flex flex-col bg-black/80">
       <div className="flex w-full justify-between px-5 my-3 ">
@@ -24,8 +27,14 @@ export const StatusMiddleBar = () => {
       <div className="flex flex-col w-full h-[40rem] px-4 my-3 overflow-auto ">
         <h1 className="text-lg text-slate-400 tracking-wider mb-3">Recent</h1>
         <div className="flex flex-col gap-2">
-          <ChatUserBar name="Yash narwar" count={1} />
-          <ChatUserBar name="ajay raghav" count={3} />
+          {users &&
+            users.map((user: any) => (
+              <ChatUserBar
+                key={user._id}
+                name={user.username}
+                src={user.profilePic}
+              />
+            ))}
         </div>
       </div>
     </div>

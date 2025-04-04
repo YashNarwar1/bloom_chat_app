@@ -95,3 +95,25 @@ export const logoutController = (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error in getUsersForSidebar: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getAlUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.log("Error in get all users controller", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};

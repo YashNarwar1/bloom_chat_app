@@ -1,11 +1,11 @@
-import {  useMutation, } from "@tanstack/react-query"
+import {  useMutation, useQueryClient, } from "@tanstack/react-query"
 import { loginUser } from "../types/auth.type";
 import toast from "react-hot-toast";
 
 
 export const LoginUser = () => {
- 
-
+   const queryClient = useQueryClient()
+   
   const mutation = useMutation({
     mutationFn: async (user: loginUser) => {
         const response = await fetch('api/auth/login', {
@@ -19,10 +19,11 @@ export const LoginUser = () => {
         };
 
         const data = await response.json();
+        console.log(data)
         return data;
     },
     onSuccess: () => {
-     
+       queryClient.invalidateQueries({ queryKey: ['user'] })
       toast.success("User Logged in Successfully")
     },
     onError: (error) =>  {

@@ -3,6 +3,7 @@ import { Input } from "../componets/Input";
 import { Button } from "../componets/Button";
 import useStore from "../store/auth.store";
 import LoginUser from "../api/login.api";
+import { Link } from "react-router-dom";
 
 type InputType = "email" | "password";
 
@@ -86,9 +87,11 @@ const Login = () => {
             <div className="w-full ">
               <p className="text-lg text-slate-600 ">
                 Create new account?{"  "}
-                <span className="underline text-blue-600 font-semibold cursor-pointer ml-2">
+                <Link
+                  to="/register"
+                  className="underline text-blue-600 font-semibold cursor-pointer ml-2">
                   Register
-                </span>
+                </Link>
               </p>
             </div>
           </div>

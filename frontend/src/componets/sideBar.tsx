@@ -1,13 +1,7 @@
-import {
-  MessageCircle,
-  PhoneCallIcon,
-  SettingsIcon,
-  SunIcon,
-  User,
-} from "lucide-react";
+import { MessageCircle, PhoneCallIcon, SettingsIcon, User } from "lucide-react";
 
 import ChatStore from "../store/chat.store";
-import { ChatMiddleBar } from "./middlebar/callMiddleBar";
+import { ChatMiddleBar } from "./middlebar/chatMiddleBar";
 import { PhoneMiddleBar } from "./middlebar/phoneMiddlebar";
 import { StatusMiddleBar } from "./middlebar/statusMiddleBar";
 import { SettingMiddleBar } from "./middlebar/settingMiddlebarBar";
@@ -56,7 +50,6 @@ export const SideBar = ({ setOpenLogoutModal }: SideBarProps) => {
             />
           </div>
           <div className="flex flex-col gap-5">
-            <SunIcon className="w-6 h-6" />
             <div onClick={handleLogoutModal} className="cursor-pointer">
               <img src="/assets/boy.png" alt="userIcon" className="w-6 h-6" />
             </div>

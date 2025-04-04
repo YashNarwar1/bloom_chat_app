@@ -9,11 +9,7 @@ export const SettingMiddleBar = () => {
       {/* Search Input div */}
 
       <div className="flex flex-col w-full h-[40rem] px-4 my-3 overflow-auto ">
-        <h1 className="text-lg text-slate-400 tracking-wider mb-3">Recent</h1>
-        <div className="flex flex-col gap-2">
-          <ChatUserBar name="Yash narwar" count={1} />
-          <ChatUserBar name="ajay raghav" count={3} />
-        </div>
+        <h1 className="text-slate-300 pl-4">mode</h1>
       </div>
     </div>
   );

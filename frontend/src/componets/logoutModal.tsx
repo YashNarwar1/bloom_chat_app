@@ -1,10 +1,19 @@
 import { LogOutIcon } from "lucide-react";
 
-interface LogoutModalProps {
-  handleLogout: () => void;
-}
+import LogoutUser from "../api/logout.api";
 
-export const LogoutModal = ({ handleLogout }: LogoutModalProps) => {
+export const LogoutModal = ({
+  setOpenLogoutModal,
+}: {
+  setOpenLogoutModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const muatation = LogoutUser();
+
+  function handleLogout() {
+    setOpenLogoutModal(false);
+    muatation.mutate();
+  }
+
   return (
     <div className="min-w-[15rem] h-[8rem] p-4 flex flex-col gap-5 items-center absolute bottom-10 left-15 bg-black/65 rounded-2xl z-20">
       <h1 className="text-lg font-semibold text-slate-100">

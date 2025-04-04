@@ -1,6 +1,7 @@
 import { CheckCircle, MessageSquareIcon, UserCircle2Icon } from "lucide-react";
 
 import { Button } from "../componets/Button";
+import { Link } from "react-router-dom";
 
 export const Logout = () => {
   return (
@@ -30,7 +31,9 @@ export const Logout = () => {
             Thank you for using bloom
           </p>
           <div className="w-full ">
-            <Button>Sign In</Button>
+            <Link to="/login">
+              <Button>Sign In</Button>
+            </Link>
           </div>
         </div>
       </div>
