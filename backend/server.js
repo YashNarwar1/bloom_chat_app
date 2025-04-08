@@ -33,6 +33,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/chat", chatRoutes);
 
 //  Catch-all for SPA routing
+
+app.use("/api", (req, res) => {
+  res.status(404).json({ message: "API route not found" });
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
