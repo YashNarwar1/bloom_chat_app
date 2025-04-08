@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon backend/server.js",
-    "start": "node backend/server.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
-  },
+  "dev": "nodemon backend/server.js",
+  "start": "node backend/server.js",
+  "build": "cd frontend && npm install && npm run build"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
