@@ -8,7 +8,7 @@ export const LoginUser = () => {
    
   const mutation = useMutation({
     mutationFn: async (user: loginUser) => {
-        const response = await fetch('api/auth/login', {
+        const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: { 'content-type': 'application/json'},
             body: JSON.stringify(user)
@@ -19,7 +19,7 @@ export const LoginUser = () => {
             throw new Error(data?.error );
           };
 
-        console.log(data)
+      
         return data;
     },
     onSuccess: () => {

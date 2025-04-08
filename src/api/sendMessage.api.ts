@@ -14,7 +14,7 @@ const SendMessage = () => {
 
     const mutation = useMutation({
         mutationFn: async ({ ...data }: Data) => {
-          const response = await fetch(`api/chat/send/${recieverId}`, {
+          const response = await fetch(`/api/chat/send/${recieverId}`, {
             method: 'POST',
             headers: { 'content-type': 'application/json'},
             body: JSON.stringify(data)

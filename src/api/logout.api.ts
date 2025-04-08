@@ -8,7 +8,7 @@ export const LogoutUser = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async () => {
-        const response = await fetch('api/auth/logout', { method: 'POST' });
+        const response = await fetch('/api/auth/logout', { method: 'POST' });
 
         if(!response.ok){
             throw new Error("Something went wrong while logging out");
