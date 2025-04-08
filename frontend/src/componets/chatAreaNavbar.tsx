@@ -1,16 +1,8 @@
 import { InfoIcon, MenuIcon, PhoneCallIcon, VideoIcon } from "lucide-react";
-import GetAllUsers from "../api/getAllUsers.api";
+
 import { useConversation } from "../store/chat.store";
 
-interface RecipientType {
-  _id: string;
-  username: string;
-  profilePic?: string;
-  status?: string;
-  lastSeen?: string;
-}
-
-export const ChatAreaNavbar = ({ user }: { user: RecipientType }) => {
+export const ChatAreaNavbar = () => {
   const { recipient: User } = useConversation();
 
   return (

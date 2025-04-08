@@ -1,6 +1,6 @@
 import { PlusIcon, SearchIcon } from "lucide-react";
 import { Input } from "../Input";
-import { ChatUserBar } from "../Chat-user-bar";
+
 import { CallUserBar } from "../call-user-bar";
 
 export const PhoneMiddleBar = () => {

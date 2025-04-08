@@ -1,5 +1,3 @@
-import { ChatUserBar } from "../Chat-user-bar";
-
 export const SettingMiddleBar = () => {
   return (
     <div className="w-[20rem] h-screen flex flex-col bg-black/80">

@@ -43,7 +43,7 @@ export const MessageArea = () => {
 
   return (
     <div className="w-full  h-screen flex flex-col">
-      <ChatAreaNavbar user={recipient} />
+      <ChatAreaNavbar />
       <div className="w-full h-full overflow-hidden bg-[url('/assets/back.jpg')] backdrop-blur-3xl flex flex-col-reverse overflow-y-auto p-4">
         <div className="flex flex-col w-full px-4 justify-end">
           {messages.map((msg: Message, idx: number) => {

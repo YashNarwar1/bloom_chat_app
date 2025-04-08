@@ -9,18 +9,11 @@ interface RecipientType {
   lastSeen: string;
 }
 
-interface User {
-  _id: string;
-  username: string;
-  profilePic: string;
-  status: string;
-  lastSeen: string;
-}
 
 
 
 
-//  Define the state part
+
 interface MiddlebarStore {
   activeBar: string;
   setActiveBar: (bar: MiddlebarStore["activeBar"]) => void;

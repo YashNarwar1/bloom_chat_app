@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.0.13",
     "@tanstack/react-query": "^5.70.0",
+    "bloom": "file:..",
     "clsx": "^2.1.1",
     "framer-motion": "^12.6.3",
     "lucide-react": "^0.479.0",

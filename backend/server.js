@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Static files
-// app.use(express.static(path.join(__dirname, "frontend", "dist")));
+app.use(express.static(path.join(__dirname, "frontend", "dist")));
 // app.use("/public", express.static(path.join(__dirname, "public"))); // Optional
 
 //  API routes
@@ -34,9 +34,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/chat", chatRoutes);
 
 //  Catch-all for SPA routing
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
 
 //  Connect to DB and start server
 connectToDb()
