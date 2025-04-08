@@ -61,17 +61,17 @@ export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({ error: "All fields are required" });
     }
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      return res.status(400).json({ error: "Invalid email or password" });
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
-      return res.status(400).json({ message: "Invalid Password" });
+      return res.status(400).json({ error: "Invalid Password" });
     }
 
     generateTokenAndCookie(user._id, res);
@@ -109,7 +109,10 @@ export const getUser = async (req, res) => {
 
 export const getAlUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password");
+    const currentUserId = req.user._id;
+    const users = await User.find({ _id: { $ne: currentUserId } }).select(
+      "-password"
+    );
 
     res.status(200).json(users);
   } catch (error) {

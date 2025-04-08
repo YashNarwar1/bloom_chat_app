@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-// 👇 Define the structure for the recipient object
+//  Define the structure for the recipient object
 interface RecipientType {
   _id: string;
   username: string;
@@ -9,24 +9,57 @@ interface RecipientType {
   lastSeen: string;
 }
 
-// 🧠 Define the state part
-interface ChatStoreState {
-  activeBar: "chatBar" | "statusBar" | "callBar" | "settingBar";
-  recipient: RecipientType;
+interface User {
+  _id: string;
+  username: string;
+  profilePic: string;
+  status: string;
+  lastSeen: string;
 }
 
-// 🛠️ Define the actions part
-interface ChatStoreActions {
-  setActiveBar: (bar: ChatStoreState["activeBar"]) => void;
-  setRecipient: (recipient: RecipientType) => void;
+
+
+
+//  Define the state part
+interface MiddlebarStore {
+  activeBar: string;
+  setActiveBar: (bar: MiddlebarStore["activeBar"]) => void;
 }
 
-// 🧩 Combine both
-type ChatStoreType = ChatStoreState & ChatStoreActions;
+
+
+
+
+export type Message = { 
+  text: string;
+  senderId: string;
+  receiverId: string;
+
+};
+
+interface ConversationStore {
+  selectedConversation: string| null ;
+  setSelectedConversation: (selectedConversation: string) => void;
+   recipient: RecipientType,
+   setRecipient: (recipient: RecipientType) => void,
+  messages: Message[];
+  setMessages: (msgs: Message[]) => void;
+}
+
 
 // ✅ Create the store
-const ChatStore = create<ChatStoreType>((set) => ({
+export const MiddleBarStore = create<MiddlebarStore>((set) => ({
   activeBar: "chatBar",
+  setActiveBar: (bar) => set(() => ({ activeBar: bar })),
+
+}));
+
+
+
+
+export const useConversation = create<ConversationStore>((set) => ({
+  selectedConversation: null,
+  setSelectedConversation: (selectedConversation: string) => set({ selectedConversation }),
   recipient: {
     _id: "",
     username: "",
@@ -34,8 +67,10 @@ const ChatStore = create<ChatStoreType>((set) => ({
     status: "",
     lastSeen: "",
   },
-  setActiveBar: (bar) => set(() => ({ activeBar: bar })),
+ 
   setRecipient: (recipient) => set(() => ({ recipient })),
+  messages: [],
+  setMessages: (messages) => set({ messages }),
 }));
 
-export default ChatStore;
+

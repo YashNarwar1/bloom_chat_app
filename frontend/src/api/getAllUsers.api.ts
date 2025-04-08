@@ -7,7 +7,7 @@ const GetAllUsers = () => {
     const {data, isLoading , isError} = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
-          const response = await fetch("/api/auth/getAll");
+          const response = await fetch("/api/auth/getAll" );
           if(!response.ok){
             throw new Error("Something went wrong while getting users");
           };

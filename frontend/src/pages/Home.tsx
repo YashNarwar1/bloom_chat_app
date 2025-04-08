@@ -1,4 +1,4 @@
-import { MessageArea } from "../componets/MessageArea";
+import { MessageArea } from "../componets/message/MessageArea";
 import { useState } from "react";
 
 import { SideBar } from "../componets/sideBar";

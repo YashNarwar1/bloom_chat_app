@@ -1,6 +1,6 @@
 import { MessageCircle, PhoneCallIcon, SettingsIcon, User } from "lucide-react";
-
-import ChatStore from "../store/chat.store";
+import { motion } from "framer-motion";
+import { MiddleBarStore } from "../store/chat.store";
 import { ChatMiddleBar } from "./middlebar/chatMiddleBar";
 import { PhoneMiddleBar } from "./middlebar/phoneMiddlebar";
 import { StatusMiddleBar } from "./middlebar/statusMiddleBar";
@@ -15,39 +15,41 @@ export const SideBar = ({ setOpenLogoutModal }: SideBarProps) => {
     setOpenLogoutModal((prev: boolean) => !prev);
   };
 
-  const { activeBar, setActiveBar } = ChatStore();
+  const { activeBar, setActiveBar } = MiddleBarStore();
+
+  const MiddleBarComponent = {
+    chatBar: <ChatMiddleBar />,
+    callBar: <PhoneMiddleBar />,
+    statusBar: <StatusMiddleBar />,
+    settingBar: <SettingMiddleBar />,
+  }[activeBar];
+
+  const sideIcons = [
+    { Icon: MessageCircle, bar: "chatBar" },
+    { Icon: User, bar: "statusBar" },
+    { Icon: PhoneCallIcon, bar: "callBar" },
+    { Icon: SettingsIcon, bar: "settingBar" },
+  ];
 
   return (
     <>
       <div className="bg-black/70 h-screen py-5 w-[4rem] flex flex-col  px-4">
         <img src="/assets/msg.png" alt="chatIcon" className="w-8 h-8 mb-10" />
         <div className="flex flex-col justify-between h-full ">
-          <div className="w-[10rem] flex flex-col gap-8 ">
-            <MessageCircle
-              onClick={() => setActiveBar("chatBar")}
-              className={`w-5 h-5  cursor-pointer hover:text-green-400 ${
-                activeBar === "chatBar" && " text-green-400 w-6 h-6"
-              }`}
-            />
-
-            <User
-              onClick={() => setActiveBar("statusBar")}
-              className={`w-5 h-5 cursor-pointer hover:text-green-400 ${
-                activeBar === "statusBar" && " text-green-400 w-6 h-6"
-              }`}
-            />
-            <PhoneCallIcon
-              onClick={() => setActiveBar("callBar")}
-              className={`w-5 h-5 cursor-pointer hover:text-green-400 ${
-                activeBar === "callBar" && " text-green-400 w-6 h-6"
-              }`}
-            />
-            <SettingsIcon
-              onClick={() => setActiveBar("settingBar")}
-              className={`w-5 h-5 cursor-pointer hover:text-green-400 ${
-                activeBar === "settingBar" && " text-green-400 w-6 h-6"
-              }`}
-            />
+          <div className="w-[10rem] flex flex-col  gap-8 ">
+            {sideIcons.map(({ Icon, bar }) => (
+              <motion.div
+                key={bar}
+                onClick={() => setActiveBar(bar)}
+                className="cursor-pointe origin-center"
+                whileHover={{ scale: 1.1 }}
+                animate={{
+                  scale: activeBar === bar ? 1.1 : 1,
+                  color: activeBar === bar ? "#22c55e" : "#ffffff",
+                }}>
+                <Icon className="w-5 h-5" />
+              </motion.div>
+            ))}
           </div>
           <div className="flex flex-col gap-5">
             <div onClick={handleLogoutModal} className="cursor-pointer">
@@ -56,10 +58,7 @@ export const SideBar = ({ setOpenLogoutModal }: SideBarProps) => {
           </div>
         </div>
       </div>
-      {activeBar === "chatBar" && <ChatMiddleBar />}
-      {activeBar === "callBar" && <PhoneMiddleBar />}
-      {activeBar === "statusBar" && <StatusMiddleBar />}
-      {activeBar === "settingBar" && <SettingMiddleBar />}
+      {MiddleBarComponent}
     </>
   );
 };

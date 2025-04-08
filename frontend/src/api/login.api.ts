@@ -14,11 +14,11 @@ export const LoginUser = () => {
             body: JSON.stringify(user)
         });
 
-        if(!response.ok){
-            throw new Error("Something went wrong while logging in");
-        };
-
         const data = await response.json();
+        if(!response.ok){
+            throw new Error(data?.error );
+          };
+
         console.log(data)
         return data;
     },
@@ -27,7 +27,7 @@ export const LoginUser = () => {
       toast.success("User Logged in Successfully")
     },
     onError: (error) =>  {
-        console.log("Error while logging in", error);
+        console.log("Error while logging in", error.message);
         toast.error(error.message);  
     }
   })
