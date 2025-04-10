@@ -1,4 +1,5 @@
 import { MessageSquareIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Input } from "../componets/Input";
 import { Button } from "../componets/Button";
 import useStore from "../store/auth.store";
@@ -107,9 +108,11 @@ const Register = () => {
             <div className="w-full ">
               <p className="text-lg text-slate-600 ">
                 Already have an acouunt?{"  "}
-                <span className="underline text-blue-600 font-semibold cursor-pointer ml-2">
+                <Link
+                  to="/login"
+                  className="underline text-blue-600 font-semibold cursor-pointer ml-2">
                   Login
-                </span>
+                </Link>
               </p>
             </div>
           </div>

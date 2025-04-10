@@ -2,12 +2,14 @@ import { PlusIcon, SearchIcon } from "lucide-react";
 import { Input } from "../Input";
 import { ChatUserBar } from "../Chat-user-bar";
 import GetAllUsers from "../../api/getAllUsers.api";
-import { useConversation } from "../../store/chat.store";
+import { useChat, useConversation } from "../../store/chat.store";
 
 export const ChatMiddleBar = () => {
   const { data: users } = GetAllUsers();
   const { recipient, setRecipient, setSelectedConversation } =
     useConversation();
+
+  const { setOpenChatModal } = useChat();
 
   const handleSelectUser = (user: any) => {
     setRecipient({
@@ -17,7 +19,7 @@ export const ChatMiddleBar = () => {
       status: user.status || "offline",
       lastSeen: new Date().toISOString(),
     });
-
+    setOpenChatModal();
     setSelectedConversation(user._id);
   };
 
@@ -27,7 +29,10 @@ export const ChatMiddleBar = () => {
         <div className="flex w-full justify-between px-5 my-3">
           <h1 className="text-xl text-slate-400 tracking-wider">Chats</h1>
           <span className="w-8 h-8 bg-slate-600 rounded-md flex items-center justify-center">
-            <PlusIcon className="w-5 h-5 text-green-300" />
+            <PlusIcon
+              onClick={() => setOpenChatModal()}
+              className="w-5 h-5 text-green-300"
+            />
           </span>
         </div>
 

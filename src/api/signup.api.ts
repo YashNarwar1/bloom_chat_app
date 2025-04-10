@@ -1,9 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast} from "react-hot-toast";
 import { registerUser } from "../types/auth.type";
+import {  useNavigate } from "react-router-dom";
+
 
 
 const RegisterUser = () => {
+   const navigate = useNavigate()
    const queryClient = useQueryClient();
    const mutation = useMutation({
        mutationFn: async (user: registerUser) => {
@@ -21,8 +24,9 @@ const RegisterUser = () => {
         return data; 
        },
        onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["users"] });
-        toast.success("User registered successfully");
+        toast.success("User Registered and Logged in");
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+        navigate("/")
        },
        onError: (error) => {
          console.log("Error while registering user", error);

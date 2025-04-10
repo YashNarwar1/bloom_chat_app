@@ -38,7 +38,7 @@ const Login = () => {
         className="hidden  md:block md:w-100 md:h-100 lg:w-110 lg:h-110 absolute bottom-10 left-25"
       />
       <div className="w-full  bg-white/90 my-5 mx-5 rounded-lg flex  justify-center">
-        <div className="w-[20rem] md:w-[25rem] lg:w-[35rem] p-10  my-10 text-center">
+        <div className="w-[30rem] md:w-[25rem] lg:w-[35rem] p-10  my-10 text-center">
           <h1 className="text-2xl font-bold tracking-wide text-center ">
             Welcome back!
           </h1>
