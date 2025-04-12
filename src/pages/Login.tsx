@@ -14,7 +14,7 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
     mutation.mutate({ email, password });
-    console.log("Login data", { email: email, password: password });
+
     setField("username", "");
     setField("email", "");
     setField("password", "");

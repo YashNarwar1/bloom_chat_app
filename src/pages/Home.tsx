@@ -21,7 +21,8 @@ const Home = () => {
           <ChatList />
         </div>
       )}
-      <div className={`w-[calc(100%-20rem)]`}>
+
+      <div className={`w-full`}>
         <MessageArea />
       </div>
     </div>

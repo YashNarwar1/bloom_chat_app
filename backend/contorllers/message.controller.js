@@ -61,3 +61,40 @@ export const getMessagesController = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const allConversation = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const conversations = await Conversation.find({
+      participants: userId,
+    })
+      .populate({
+        path: "messages",
+        options: { sort: { createdAt: -1 }, limit: 1 },
+      })
+      .populate({
+        path: "participants",
+        select: "username profilePic", // exclude sensitive info
+      })
+      .sort({ updatedAt: -1 });
+
+    const result = conversations.map((conv) => {
+      const otherUser = conv.participants.find(
+        (p) => p._id.toString() !== userId.toString()
+      );
+
+      return {
+        _id: conv._id,
+        user: otherUser,
+        lastMessage: conv.messages[0]?.text || "",
+        lastMessageAt: conv.messages[0]?.createdAt || conv.updatedAt,
+      };
+    });
+
+    res.status(200).json(result);
+  } catch (error) {
+    console.log("Error occurred while getting all conversations:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};

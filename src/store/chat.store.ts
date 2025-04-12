@@ -70,10 +70,11 @@ export const useConversation = create<ConversationStore>((set) => ({
 interface UseChatModalProps {
   openChatModal: boolean;
   setOpenChatModal: () => void;
+  
 }
 
 export const useChat = create<UseChatModalProps>((set) => ({
   openChatModal: false,
   setOpenChatModal: () =>
-    set((state) => ({ openChatModal: !state.openChatModal })),
+    set((state) => ({ openChatModal: state.openChatModal ? false : true  })),
 }));

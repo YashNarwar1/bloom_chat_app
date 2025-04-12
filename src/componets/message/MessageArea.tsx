@@ -7,7 +7,7 @@ import GetMessage from "../../api/getMessage.api";
 import GetUser from "../../api/getUser.api";
 
 export const MessageArea = () => {
-  const { recipient } = useConversation();
+  const { recipient, selectedConversation } = useConversation();
   const lastMsgRef = useRef<HTMLDivElement | null>(null);
   const { data: messages = [], refetch } = GetMessage(recipient._id);
 
@@ -28,7 +28,7 @@ export const MessageArea = () => {
     }
   }, [recipient._id, refetch]);
 
-  if (!recipient._id) {
+  if (!selectedConversation) {
     return (
       <div className="w-full h-full bg-black/45 flex flex-col gap-2 items-center justify-center">
         <MessageCircleDashed className="w-20 h-20" />

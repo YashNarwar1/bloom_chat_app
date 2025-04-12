@@ -14,7 +14,7 @@ const Register = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutation.mutate({ username, email, password, confirmPassword });
-    console.log("formdata", { username, email, password, confirmPassword });
+
     setField("username", "");
     setField("email", "");
     setField("password", "");
