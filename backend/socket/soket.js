@@ -1,10 +1,8 @@
 import express from "express";
-
 import http from "http";
 import { Server } from "socket.io";
 
 const app = express();
-
 const server = http.createServer(app);
 
 const io = new Server(server, {
@@ -26,7 +24,8 @@ io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId;
   if (userId && userId !== "undefined") {
     userSocketMap[userId] = socket.id;
-    console.log(`User ${userId} connnected with socket Id ${socket.id}`);
+    console.log(`User ${userId} connected with socket Id ${socket.id}`);
+    io.emit("getOnlineUser", Object.keys(userSocketMap)); // Emit after user is added
   }
 
   socket.on("sendMessage", ({ recieverId, message }) => {
@@ -39,9 +38,7 @@ io.on("connection", (socket) => {
     }
   });
 
-  io.emit("getOnlineUser", Object.keys(userSocketMap));
-
-  io.on("disconnected", () => {
+  socket.on("disconnect", () => {
     console.log(`User Disconnected: ${socket.id}`);
     if (userId) {
       delete userSocketMap[userId];

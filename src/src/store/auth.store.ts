@@ -19,5 +19,3 @@ setField: (name , value) => set((state) => ({...state, [name]: value}))
 
 
 export default useStore;
-
-
